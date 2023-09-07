@@ -10,7 +10,7 @@ from selenium.common.exceptions import TimeoutException
 def test_login(driver):
     try:
         # Open the login page
-        driver.get("http://52.200.65.240:3000/login")
+        driver.get("http://54.164.44.247:3000/login")
         
         # Find the username and password input fields and enter the values with a delay
         time.sleep(2)
@@ -43,7 +43,7 @@ def test_login(driver):
         print("Redirected to course Page")
 
         # Wait for the course page to load
-        #WebDriverWait(driver, 10).until(EC.url_contains("http://52.200.65.240:3000/main/courses"))
+        #WebDriverWait(driver, 10).until(EC.url_contains("http://54.164.44.247:3000/main/courses"))
 
         # Go to practice Page
         time.sleep(10)
@@ -82,7 +82,7 @@ def test_login(driver):
 
 
 # Set the path to the Chrome driver executable as an environment variable
-chrome_driver_path = "/usr/bin/chromedriver"
+chrome_driver_path = "/home/ec2-user/myfolder"
 os.environ["PATH"] += os.pathsep + chrome_driver_path
 
 # Initialize the Chrome driver

@@ -13,6 +13,7 @@ import SuccessStories from "./pages/Successstories";
 import Forgotpassword from "./pages/forgotpassword";
 import CourseList from "./pages/course";
 import Users from "./pages/users";
+import Profile from "./pages/profile";
 function App() {
   return (
     <>
@@ -22,6 +23,7 @@ function App() {
         <Route path="/signup" element={<Signuppage/>}/>
         <Route path="/forgotpassword" element={<Forgotpassword/>}/>
         <Route path="/main" element={<Layout/>}>
+          <Route path="profile" element={<Profile/>}/>
           <Route path="home" element={<Home/>}/>
           <Route path="educators" element={<Educators/>}/>
           <Route path="courses" element={<CourseList/>}/>

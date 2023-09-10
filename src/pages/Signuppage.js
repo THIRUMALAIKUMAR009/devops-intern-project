@@ -59,7 +59,10 @@ function Signuppage() {
 
                 if(!repasswordValidator(input.repassword)) 
                 return seterrorMessage('please enter same password');
-
+                
+                if(!numberValidator)
+                return seterrorMessage("please enter valid phone number")
+            
                 input.image = image
                 console.log(input)
                 register()

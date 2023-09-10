@@ -12,12 +12,12 @@ function Layout(){
     useEffect(()=>{
         getUserdata().then(res => {
             setData(res)
-            console.log(res)
+            // console.log(res)
         })
     },[])
 
     const logout = () => {
-        sessionStorage.removeItem('userdata')
+        sessionStorage.removeItem('user-data')
         navigate('/login')
     }
 
@@ -30,7 +30,7 @@ function Layout(){
             <div className='layout'>
             <nav>
                 <div class="logo">
-                <img src={bgImage} alt="Image Description"  />
+                <img src={bgImage} alt="Logo"/>
                     <h4>KITE INSTITUTE</h4>
                 </div>
                 <div class="nav-links" ref={nav}>
@@ -57,16 +57,20 @@ function Layout(){
                     <li onClick={navSlide}>
                         <NavLink to='/main/contactus'>Contact Us</NavLink>
                     </li>
+
+                    {data && data.role === 'admin' && <li onClick={navSlide}>
+                        <NavLink to={'/main/users'} state={data}>Users</NavLink>
+                    </li>}
+
                     {data && <li className='profilepos' onClick={() => setMenu(prev => {return !prev})}>
                         <div className='profile'>
                             <img src={data.image} className='image' alt='avatar'></img>
                             <div className={"details"}>
                                 <span className={"username"}>{data.username}</span>
-                                {/* {data.role === 'admin' && <span className="role">{data.role}</span>} */}
                             </div>
                         </div>
                         {menu && <div className='menu'>
-                            {data.role === 'admin' && <NavLink to={'/main/users'} state={data}>Users</NavLink>}
+                            <NavLink to={'/main/profile'} state={data}>Profile</NavLink>
                             <span onClick={logout}>Logout</span>
                         </div>}
                     </li>}

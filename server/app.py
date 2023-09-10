@@ -109,14 +109,27 @@ def signup():
         conn.close()
         return jsonify({"status": "success"})
 
-@app.route('/user')
+@app.route('/user',methods=["GET","PUT"])
 @authorization
 @cross_origin(origins='*')
 def user():
-    #Process user data via token
-    token = request.args.get('apikey')
-    data = jwt.decode(token, os.getenv('SECRET_KEY'),algorithms=["HS256"])
-    return jsonify(data)
+    if request.method == "GET":
+        #Process user data via token
+        token = request.args.get('apikey')
+        data = jwt.decode(token, os.getenv('SECRET_KEY'),algorithms=["HS256"])
+        return jsonify(data)
+    if request.method == "PUT":
+        user_id = request.form['user_id']
+        username = request.form['username']
+        email = request.form['email']
+        image = request.form['image']
+        conn = connection()
+        cursor = conn.cursor()
+        cursor.execute(f"UPDATE user_table SET username='{username}',email='{email}',image='{image}' WHERE user_id = {user_id}")
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return jsonify({'status':'updated'})
 
 @app.route('/users' , methods=["GET","POST","PUT","DELETE"])
 @authorization

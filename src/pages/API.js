@@ -3,12 +3,6 @@ import axios from "axios"
 const url = process.env.REACT_APP_HOST
 // const url = "http://127.0.0.1:5000"
 
-export const Post = async(endpoint,input) => {
-    const {data} = await axios.post( url+endpoint, input)
-
-    return data
-}
-
 export const Login = async(input) => {
     const {data} = await axios.post(`${url}/login`,input)
 
@@ -28,12 +22,30 @@ export const ForgotPassword = async(input) => {
 }
 
 export const getUserdata = async () => {
-    let token = sessionStorage.getItem('API_Key');
-    token = JSON.parse(token);
-    const { data } = await axios.get(`${url}/user?apikey=${token}`)
-    
+    let data = sessionStorage.getItem('user-data') || null;
+    if(data === null)
+    {
+        console.log("Api call..")
+        let token = sessionStorage.getItem('API_Key');
+        token = JSON.parse(token);
+        let {data} = await axios.get(`${url}/user?apikey=${token}`)
+        sessionStorage.setItem('user-data',JSON.stringify(data))
+        return data;
+    }
+    else
+    {
+        data = JSON.parse(data)
+    }
     return data;
   };
+
+export const putUserdata = async (input) => {
+let token = sessionStorage.getItem('API_Key');
+token = JSON.parse(token);
+const { data } = await axios.put(`${url}/user?apikey=${token}`,input)
+
+return data;
+};
 
 export const getUsersdata = async () => {
 let token = sessionStorage.getItem('API_Key');

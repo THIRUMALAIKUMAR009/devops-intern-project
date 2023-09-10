@@ -1,3 +1,7 @@
+:root
+{
+  --bgColor:#ffa45b;
+}
 * {
     margin: 0;
     padding: 0px;
@@ -36,7 +40,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #ffa45b;
+    background-color: var(--bgColor);
     width: 100vw;
     min-height: 100vh;
     background-size: cover;
@@ -299,9 +303,9 @@ nav{
 }
 .nav-links
 {
-  display: grid;
-  place-items: center;
-  grid-template-columns: repeat(7,auto);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   gap: 10px;
 }
 
@@ -339,6 +343,8 @@ nav{
     position: absolute;
     top: 0px;
     translate: 100% 0px;
+    display: grid;
+    place-items: center;
     grid-template-columns: repeat(1,auto);
     width: 100vw;
     min-height: 100vh;
@@ -421,7 +427,7 @@ nav{
     gap: 10px;
     width: 100vw;
     min-height: 100vh;
-    background-color: #ffa45b;
+    background-color: var(--bgColor);
 }
 
 .profilecard
@@ -563,7 +569,7 @@ nav{
   cursor: pointer;
 }
 
-.courses,.quizpage,.users
+.courses,.quizpage,.users,.profilepage
 {
     display: flex;
     justify-content: flex-start;
@@ -572,14 +578,14 @@ nav{
     min-height: 100vh;
     flex-direction: column;
     gap: 10px;
-    background-color: #ffa45b;
+    background-color: var(--bgColor);
     overflow-y: scroll;
 }
 .users
 {
   padding: 10px;
 }
-.quizpage::-webkit-scrollbar,.courses::-webkit-scrollbar
+.quizpage::-webkit-scrollbar,.courses::-webkit-scrollbar,.users::-webkit-scrollbar
 {
   width: 0px;
 }
@@ -729,7 +735,7 @@ nav{
     align-items: center;
     flex-direction: column;
     
-    background-color: #ffa45B;
+    background-color: var(--bgColor);
     background-size: cover;
     font-family: 'poppins', sans-serif;
 }
@@ -896,7 +902,7 @@ nav{
   width: 100vw;
   min-height: 100vh;
   flex-direction: column;
-  background-color: #ffa45b;
+  background-color: var(--bgColor);
   overflow-x: hidden;
   overflow-y: scroll;
 }
@@ -1147,7 +1153,7 @@ nav{
   margin-top: 10px;
 }
 
-.App-header {
+/* .App-header {
   background-color: #032539;
   color: white;
   text-align: center;
@@ -1163,7 +1169,7 @@ nav{
 }
 
 .vision-box, .mission-box, .mission-image {
-  background-color: #ffa45b;
+  background-color: var(--bgColor);
   border: 1px solid #d0d0d0;
   border-radius: 8px;
   padding: 20px;
@@ -1173,14 +1179,14 @@ nav{
 }
 
 .mission-box {
-  align-self: flex-end; /* Align to the right */
+  align-self: flex-end;
 }
 .fun-text{
-  /*width: 85%;
-  height: 10%;*/
+  width: 85%;
+  height: 10%;
   margin-top: 10%;
   gap: 40px;
-  /*border-radius: 100px;*/
+  border-radius: 100px;
   box-shadow: black;
   display: flex;
   flex-direction: row;
@@ -1193,8 +1199,8 @@ nav{
 
 }
 .fun-text1 {
-  /*width: 85%;
-  height: 10%;*/
+  width: 85%;
+  height: 10%;
   margin-top: 10%;
   gap: 40px;
   display: flex;
@@ -1204,7 +1210,7 @@ nav{
   padding: 30px;
   margin: 20px;
   max-width: 1290px;
-  /*border-radius: 10px;*/
+  border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -1296,7 +1302,7 @@ a {
   grid-gap: 25px;
 }
 .price-col{
-  background: #ffa45b;
+  background: var(--bgColor);
   padding: 10% 15%;
   border-radius: 10px;
   color: black;
@@ -1342,4 +1348,48 @@ a {
 }
 .price-col button:hover{
   background: #e33058;
+}*/
+
+.profilepage
+{
+  justify-content: center;
+}
+.profilepage > form
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  height: 60vh;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.profilepage > form > .image
+{
+  width: 200px;
+}
+
+.profilepage > form > div
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 50%;
+  gap: 10px;
+}
+
+/* .profilepage > form > div > label
+{
+  align-self: flex-start;
+} */
+.profilepage > form > div > input
+{
+  width: 80%;
+  height: 50px;
+  padding: 10px;
+  font-size: 1.5em;
+  border: none;
+  border-radius: 10px;
 }

@@ -96,7 +96,7 @@ function Quizzes()
                     {questions.length > 0 && questions.map((question,index)=>{
                         return(
                             <>
-                                <div className="ques quiz">
+                                <div className="ques quiz" key={index}>
                                     <span className="title" onClick={() => {navigate(`/main/quiz/${question.quiz_id}`)}}>{index+1}. {question.quiz_title}</span>
                                     <p>{question.quiz_description}</p>
                                     <div className="edit">

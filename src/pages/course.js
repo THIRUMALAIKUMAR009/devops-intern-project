@@ -74,7 +74,7 @@ function Courses() {
 
   return (
   
-      <div className="educators" style={{ overflowY: "scroll", overflowX: "hidden", width: "1495px", height: "200px" }}>
+      <div className="educators">
         <div className="courses">
           {data !== "" && data.role !== "Student" && (
             <form className="admin-form" onSubmit={submit}>

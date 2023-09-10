@@ -74,7 +74,7 @@ function Quizzes()
     }
     return (
         <>
-        <div className="educators" style={{ overflowY: "scroll", overflowX: "hidden", width: "1495px", height: "200px" }}>
+        <div className="educators">
             <div className="quizpage">
             {update && <div className="update">
                 <form className=" admin-form Modal" onSubmit={updatefn}>

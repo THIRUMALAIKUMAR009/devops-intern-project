@@ -59,7 +59,7 @@ const SuccessStories = () => {
 
   return (
     <>
-    <div className="educators" style={{ overflowY: "scroll", overflowX: "hidden", width: "1495px", height: "200px" }}>
+    <div className="educators">
         <div className="success">
         {role === 'Student' && <form className="admin-form" onSubmit={submit}>
                         <input id='cid' type="text" ref={courseid} placeholder="course id" required/>

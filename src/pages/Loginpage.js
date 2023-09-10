@@ -88,13 +88,13 @@ function Loginpage() {
                 </div>
                 </div>
 
-                <input type="submit" className='Loginbutton' value='login'/>
+                <input id='login' type="submit" className='Loginbutton' value='login'/>
 
                 <p className="divider">OR</p>
                 <p className='p1f1'>Get started with your free account</p>
 
                 <div className='Socialmediapage'>
-                    <button type="button" className="Socialmediabutton" onClick={() => { googleSignIn().then(() => navigate('/password')).catch(err => {console.error(err)})}}><div className='icon'></div> Continue with Google</button>
+                    <button id='ssbutton' type="button" className="Socialmediabutton" onClick={() => { googleSignIn().then(() => navigate('/password')).catch(err => {console.error(err)})}}><div className='icon'></div> Continue with Google</button>
                     {/* <button type="button" className="Socialmediabutton facebook" onClick={() => { facebookSignIn().then(() => navigate('/password')).catch(err => {console.error(err)})}}><i className="fa fa-facebook-square"> Login via Facebook</i></button>
                     <button type="button" className="Socialmediabutton twitter" onClick={() => { twitterSignIn().then(() => {navigate('/password')}).catch(err => {console.error(err)})}}><i className="fa fa-twitter-square"> Login via Twitter</i></button> */}
                 </div>

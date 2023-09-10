@@ -35,27 +35,27 @@ function Layout(){
                 </div>
                 <div class="nav-links" ref={nav}>
                     <li onClick={navSlide}>
-                        <NavLink to='/main/home'>Home</NavLink>
+                        <NavLink to='/main/home' id='home'>Home</NavLink>
                     </li>
 
                     <li onClick={navSlide}>
-                        <NavLink to='/main/educators' state={data}>Educators</NavLink>
+                        <NavLink to='/main/educators' state={data} id='educators'>Educators</NavLink>
                     </li>
                     
                     <li onClick={navSlide}>
-                        <NavLink to='/main/courses' state={data}>Course</NavLink>
+                        <NavLink to='/main/courses' state={data} id='course'>Course</NavLink>
                     </li>
 
                     <li onClick={navSlide}>
-                        <NavLink to='/main/quiz' state={data}>Practice</NavLink>
+                        <NavLink to='/main/quiz' state={data} id='practice'>Practice</NavLink>
                     </li>
 
                     <li onClick={navSlide}>
-                        <NavLink to='/main/successstories' state={data}>Success Stories</NavLink>
+                        <NavLink to='/main/successstories' state={data} id='success'>Success Stories</NavLink>
                     </li>
 
                     <li onClick={navSlide}>
-                        <NavLink to='/main/contactus'>Contact Us</NavLink>
+                        <NavLink to='/main/contactus' id='contact'>Contact Us</NavLink>
                     </li>
 
                     {data && data.role === 'admin' && <li onClick={navSlide}>

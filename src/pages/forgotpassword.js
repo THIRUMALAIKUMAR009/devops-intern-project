@@ -41,11 +41,11 @@ function Forgotpassword()
                     {errorMessage !== '' && <div className='msg'>{errorMessage}</div>}
                     <div className='input-box'>
                     <div className='input-group mb-3'>
-                        <span className='input-group-addon'><i className="uil uil-user-circle"></i></span>
-                        <input type="email" id="email" className="form-control" ref={email} placeholder='Email address' required/>
+                        <span  className='input-group-addon'><i className="uil uil-user-circle"></i></span>
+                        <input  type="email" id="email" className="form-control" ref={email} placeholder='Email address' required/>
                     </div>
                     </div>
-                    <input type="submit" className='Loginbutton' value='Send'/>
+                    <input id="login" type="submit" className='Loginbutton' value='Send'/>
                     <p className='p1f2'>Don't have an account? <Link to="/signup" className='signup'>Sign Up</Link></p>
                 </form>
             </section>

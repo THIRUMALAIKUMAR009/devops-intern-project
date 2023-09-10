@@ -69,6 +69,7 @@ const Contactus = () => {
             <h2>Send Message</h2>
             <div className="inputBox">
               <input
+              id="name"
                 type="text"
                 name="fullName"
                 value={fullName}
@@ -79,6 +80,7 @@ const Contactus = () => {
             </div>
             <div className="inputBox">
               <input
+                id="email"
                 type="email"
                 name="email"
                 value={email}
@@ -89,6 +91,7 @@ const Contactus = () => {
             </div>
             <div className="inputBox">
               <textarea
+                id="message"
                 name="message"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
@@ -97,7 +100,7 @@ const Contactus = () => {
               <span>Type your Message...</span>
             </div>
             <div className="inputBox">
-              <input type="submit" value="Send" />
+              <input type="submit" value="Send" id="submit"/>
             </div>
           </form>
         </div>

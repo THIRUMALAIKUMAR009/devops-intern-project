@@ -80,7 +80,7 @@ const Users = () => {
                                 <option>teacher</option>
                             </select>
                             {/* <input type="button" className="updatebtn" value={'Promote'} onClick={() => updatefn(user)}/> */}
-                            <input type="button"  className="deletebtn" value={'Delete'} onClick={() => deletefn(user.email)}/>
+                            <input id='deletebtn'type="button"  className="deletebtn" value={'Delete'} onClick={() => deletefn(user.email)}/>
                         </div>: <div className="edit">You</div>}
                     </div>
                 })}

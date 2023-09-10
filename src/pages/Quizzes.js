@@ -74,21 +74,22 @@ function Quizzes()
     }
     return (
         <>
+        <div className="educators" style={{ overflowY: "scroll", overflowX: "hidden", width: "1495px", height: "200px" }}>
             <div className="quizpage">
             {update && <div className="update">
                 <form className=" admin-form Modal" onSubmit={updatefn}>
                 <span className="close" onClick={() => (setUpdate(false))}>x</span>
-                    <input type="text" ref={update_id} placeholder="course id" required/>
-                    <input type="text" ref={update_title} placeholder="quiz title" required/>
-                    <input type="text" ref={update_description} placeholder="quiz description" required/><br/>
-                    <input type="submit" value="Update"/>
+                    <input id='course' type="text" ref={update_id} placeholder="course id" required/>
+                    <input id='qui' type="text" ref={update_title} placeholder="quiz title" required/>
+                    <input id='desc' type="text" ref={update_description} placeholder="quiz description" required/><br/>
+                    <input id='upsubmit' type="submit" value="Update"/>
                 </form>
             </div>}
             {role !== 'Student' && <form className="admin-form" onSubmit={submit}>
-                        <input type="text" ref={id} placeholder="course id" required/>
-                        <input type="text" ref={title} placeholder="quiz title" required/>
-                        <input type="text" ref={description} placeholder="quiz description" required/>
-                        <input type="submit" value="+"/>
+                        <input id='id' type="text" ref={id} placeholder="course id" required/>
+                        <input id='tit' type="text" ref={title} placeholder="quiz title" required/>
+                        <input id='qu' type="text" ref={description} placeholder="quiz description" required/>
+                        <input id='subm' type="submit" value="+"/>
                     </form>}
                 {questions.length > 0 && <h1 className="heading">Practice quiz</h1>}
                 <div className="quizpage">
@@ -100,18 +101,20 @@ function Quizzes()
                                     <span className="title" onClick={() => {navigate(`/main/quiz/${question.quiz_id}`)}}>{index+1}. {question.quiz_title}</span>
                                     <p>{question.quiz_description}</p>
                                     <div className="edit">
-                                        {role !== 'Student' && <input type="button" className="updatebtn" value="update" onClick={async() => {
+                                        {role !== 'Student' && <input id='updatebtn' type="button" className="updatebtn" value="update" onClick={async() => {
                                             setUpdate(true)
                                             setdata(question)
                                         }}/>}
-                                        {role !== 'Student' && <input type="button" className="deletebtn" value="Delete" onClick={() => {
+                                        {role !== 'Student' && <input id='deletebtn' type="button" className="deletebtn" value="Delete" onClick={() => {
                                             deletefn(question)
                                         }}/>}
                                     </div>
                                 </div>
+                                
                             </>
                         )
                     })}
+                </div>
                 </div>
             </div>
         </>

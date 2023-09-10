@@ -63,12 +63,13 @@ function Educators()
 
     return (
         <>
+            <div className="educators" style={{ overflowY: "scroll", overflowX: "hidden", width: "1495px", height: "200px" }}>
             <div className="educators">
                 {role === 'admin' && <form className="admin-form" onSubmit={submit}>
-                        <input type="email" ref={email} placeholder="Enter email" required/>
-                        <input type="text" ref={biography} placeholder="biography" required/>
-                        <input type="text" ref={subjects} placeholder="subjects" required/>
-                        <input type="submit" value="+"/>
+                        <input id="mail" type="email" ref={email} placeholder="Enter email" required/>
+                        <input id='bio'type="text" ref={biography} placeholder="biography" required/>
+                        <input id="sub" type="text" ref={subjects} placeholder="subjects" required/>
+                        <input id="sub" type="submit" value="+"/>
                     </form>}
                 {educators.length > 0 && <h1 className="heading">Our Experts</h1>}
                 <div className="educators">
@@ -93,6 +94,7 @@ function Educators()
                         )
                     })}
                 </div>
+            </div>
             </div>
         </>
     )

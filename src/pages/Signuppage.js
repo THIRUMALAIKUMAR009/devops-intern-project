@@ -101,7 +101,7 @@ function Signuppage() {
 
                     {errorMessage.length > 0 && <div className='msg'>{errorMessage}</div>}
                 <img src={image} className={'image'} alt='avatar'onClick={() => files.current.click() }/>
-                <input type='file' accept='.jpg, .png' ref={files} onChange={uploadImage} hidden/>
+                <input id='img'type='file' accept='.jpg, .png' ref={files} onChange={uploadImage} hidden/>
                 <div className='input-box'>
                 <div className='input-group mb-3'>
                     <span className='input-group-addon' id='addon'><i className="uil uil-user-circle"></i></span>
@@ -152,7 +152,7 @@ function Signuppage() {
                 </div>
                 </div>
             
-                    <button type="submit" className='Signupbutton' value="send" >Register</button>
+                    <button id='signupbtn' type="submit" className='Signupbutton' value="send" >Register</button>
                 
                     <p className='p1f3'>Already have an account? <Link to='/login' className='signin'>Sign In</Link></p>
                 </div>

@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { addCourses, deleteCourses, getCourses, getUserdata } from "./API";
 
 function Courses() {
-  const [data,setData] = useState('')
+  const [data, setData] = useState("");
   const [courses, setCourses] = useState([]);
   const [loader, setLoader] = useState(false);
   const courseName = useRef();
@@ -22,10 +22,12 @@ function Courses() {
       .then((data) => {
         setCourses(data);
         setLoader(false);
-        getUserdata().then(res => {
-            setData(res)
-            console.log(res)
-        })
+        getUserdata()
+          .then((res) => {
+            setData(res);
+            console.log(res);
+          })
+          .catch((error) => console.error(error));
       })
       .catch((error) => alert(error));
   };
@@ -34,11 +36,11 @@ function Courses() {
     event.preventDefault();
     setLoader(true);
     const input = {
-        user_id:data.public_id,
-        course_name: courseName.current.value,
-        course_description: courseDescription.current.value,
-        course_duration: courseDuration.current.value,
-        enrollment_fee: enrollmentFee.current.value,
+      user_id: data.public_id,
+      course_name: courseName.current.value,
+      course_description: courseDescription.current.value,
+      course_duration: courseDuration.current.value,
+      enrollment_fee: enrollmentFee.current.value,
     };
     addCourses(input)
       .then((res) => {
@@ -49,7 +51,7 @@ function Courses() {
           setCourses([]);
           setLoader(true);
           fetchCourses();
-          courseName.current.value = courseDescription.current.value = courseDuration.current.value = enrollmentFee.current.value = ''
+          courseName.current.value = courseDescription.current.value = courseDuration.current.value = enrollmentFee.current.value = "";
         }
       })
       .catch((err) => console.error(err));
@@ -65,36 +67,55 @@ function Courses() {
     }
   };
 
-  return (
-    <div className="courses">
-      {data !== '' && data.role !== 'Student' && <form className="admin-form" onSubmit={submit}>
-        <input type="text" ref={courseName} placeholder="Course Name" required />
-        <input type="text" ref={courseDescription} placeholder="Course Description" required />
-        <input type="text" ref={courseDuration} placeholder="Course Duration" required />
-        <input type="text" ref={enrollmentFee} placeholder="Enrollment Fee" required />
-        <input type="submit" value="+" />
-      </form>}
-      {courses.length > 0 && <h1 className="heading">Our Courses</h1>}
-      <div className="courses">
-        {loader && <div className="loader" />}
-        {courses.length > 0 &&
-          courses.map((course, index) => {
-            return (
-              <div className="course-card" key={index}>
-                {data !== '' && data.role !== 'Student' && <span className="close" onClick={() => deleteCourseFn(course.course_id)}>x</span>}
-                <div className="details">
-                  <span className="name">{course.course_name}</span>
-                  <p>{course.course_description}</p>
-                  <span>
-                    Duration: {course.course_duration} | Fee: {course.enrollment_fees}
-                  </span>
-                </div>
-              </div>
-            );
-          })}
-      </div>
-    </div>
-  );
-}
+  const handleSubscribe = () => {
+    // Replace this with your subscribe logic
+    alert("Payment button clicked");
+  };
 
-export default Courses;
+  return (
+  
+      <div className="educators" style={{ overflowY: "scroll", overflowX: "hidden", width: "1495px", height: "200px" }}>
+        <div className="courses">
+          {data !== "" && data.role !== "Student" && (
+            <form className="admin-form" onSubmit={submit}>
+              <input id="name" type="text" ref={courseName} placeholder="Course Name" required />
+              <input id="des" type="text" ref={courseDescription} placeholder="Course Description" required />
+              <input id="dur" type="text" ref={courseDuration} placeholder="Course Duration" required />
+              <input id="fee" type="text" ref={enrollmentFee} placeholder="Enrollment Fee" required />
+              <input id="subm" type="submit" value="+" />
+            </form>
+          )}
+          {courses.length > 0 && <h1 className="heading">Our Courses</h1>}
+          <div className="courses">
+            {loader && <div className="loader" />}
+            {courses.length > 0 &&
+              courses.map((course, index) => {
+                return (
+                  <div className="course-card" key={index}>
+                    {data !== "" && data.role !== "Student" && (
+                      <span className="close" onClick={() => deleteCourseFn(course.course_id)}>
+                        x
+                      </span>
+                    )}
+                    <div className="details">
+                      <span className="name">{course.course_name}</span>
+                      <p>{course.course_description}</p>
+                      <span>
+                        Duration: {course.course_duration} | Fee: {course.enrollment_fees}
+                      </span>
+                      
+                     {/* Conditionally render the "Pay Now" button for students */}
+                    {data.role === 'Student' && (
+                    <button type="button" onClick={() => handleSubscribe(course.course_id)}>Pay Now</button>
+                    )}
+                  </div>
+                  </div>
+                );
+              })}
+          </div>
+        </div>
+      </div>
+    );
+  }
+  
+  export default Courses;

@@ -98,17 +98,17 @@ function Quiz()
             {update && <div className="update">
                 <form className=" admin-form Modal" onSubmit={updatefn}>
                 <span className="close" onClick={() => (setUpdate(false))}>x</span>
-                    <input type="text" ref={update_question} placeholder="Question" required/>
-                    <input type="text" ref={update_options} placeholder="options" required/>
-                    <input type="text" ref={update_answer} placeholder="answer" required/><br/>
-                    <input type="submit" value="Update"/>
+                    <input id="question" type="text" ref={update_question} placeholder="Question" required/>
+                    <input id="options" type="text" ref={update_options} placeholder="options" required/>
+                    <input id='ans'type="text" ref={update_answer} placeholder="answer" required/><br/>
+                    <input id="usumbit" type="submit" value="Update"/>
                 </form>
             </div>}
             {data !== '' && data !== 'Student' && <form className="admin-form" onSubmit={addQuestion}>
-                        <input type="text" ref={question} placeholder="Question" required/>
-                        <input type="text" ref={options} placeholder="options" required/>
-                        <input type="text" ref={answer} placeholder="answer" required/>
-                        <input type="submit" value="+"/>
+                        <input id='que' type="text" ref={question} placeholder="Question" required/>
+                        <input id='opt'type="text" ref={options} placeholder="options" required/>
+                        <input id='ans' type="text" ref={answer} placeholder="answer" required/>
+                        <input id='sub' type="submit" value="+"/>
                     </form>}
                 {loader && <div className="loader"/>}
                 {questions.length > 0 && <h1 className="heading" id="heading">{questions[0].quiz_title}</h1>}
@@ -131,11 +131,11 @@ function Quiz()
                                 })}
                             </div>
                             <div className="edit">
-                                {data !== 'Student' && <input type="button" className="updatebtn" value="update" onClick={async() => {
+                                {data !== 'Student' && <input id="student" type="button" className="updatebtn" value="update" onClick={async() => {
                                     setUpdate(true)
                                     setQueID(question.question_id)
                                 }}/>}
-                                {data !== 'Student' && <input type="button" className="deletebtn" value="Delete" onClick={() => {
+                                {data !== 'Student' && <input id="stu" type="button" className="deletebtn" value="Delete" onClick={() => {
                                     deletefn(question)
                                 }}/>}
                             </div>

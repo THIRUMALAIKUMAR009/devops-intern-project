@@ -1224,3 +1224,25 @@ button:hover {
 
 
 
+.admin-form {
+  background-color: #333; 
+  padding: 20px; 
+}
+
+.admin-form input[type="file"] {
+  color: #fff; 
+  border: none; 
+  background-color: #444; 
+  padding: 10px; 
+  border-radius: 5px; 
+  cursor: pointer; 
+}
+
+.admin-form input[type="file"]:hover {
+  background-color: #555; 
+}
+
+.admin-form input[type="file"]:focus {
+  outline: none; 
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); 
+}

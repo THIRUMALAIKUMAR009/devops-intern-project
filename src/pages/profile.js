@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom"
 import { uploadToCloud } from "./firebase"
 
 const Profile = () =>{
+    const [loader,setLoader] = useState(false)  
     const [user,setUser] = useState()
     const [image,setImg] = useState()
     const username = useRef()
@@ -33,29 +34,37 @@ const Profile = () =>{
         }
     }
 
+    const fetchUser =  async () => {
+        const data = await getUserdata()
+        setUser(data)
+        setImg(data.image)
+        username.current.value = data.username
+        email.current.value = data.email
+    }
     useEffect(() => {
-        (async () => {
-            const data = await getUserdata()
-            setUser(data)
-            setImg(data.image)
-            username.current.value = data.username
-            email.current.value = data.email
-        })()
+        fetchUser()
     },[])
 
     const submit = (e) =>{
         e.preventDefault()
+        setLoader(true)
         const data = new FormData()
         data.append('user_id',user?.public_id)
         data.append('image',image)
         data.append('username',username.current.value)
         data.append('email',email.current.value)
 
-        putUserdata(data).then()
+        putUserdata(data).then(() => {
+            fetchUser().then(() => {
+                setLoader(false)
+            })
+        })
     }
+    
     return (
         <>
             <div className="profilepage">
+                {loader && <div className="loader"/>}
                 <form onSubmit={submit}>
                     <input type='file' accept='.jpg, .png' ref={files} onChange={(e) => uploadImage(e,user.username)} hidden/>
                     <img src={image} className="image" alt="avatar" onClick={() => files.current.click() }/>

@@ -369,6 +369,33 @@ def update_quiz(quiz_id):
         conn.close()
         return jsonify({"status":"Deleted"})
 
+@app.route('/quiz/fileupload/<int:quiz_id>',methods=["POST"])
+# @authorization
+@cross_origin(origins="*")
+def file_upload(quiz_id):
+    if request.method == "POST":
+        file = request.files['file']
+        import pandas as pd
+        dataframe = pd.read_csv(file)
+        questions = list(dataframe.itertuples(index=True))
+        questions_List = []
+        for q in questions:
+            question = {}
+            question['question_text'] = q[2]
+            question['question_options'] = q[3].split(",")
+            question['correct_answer'] = q[4]
+            questions_List.append(question)
+        
+        conn = connection()
+        cursor = conn.cursor()
+        for question in questions_List:
+            cursor.execute(f"INSERT INTO question_table (quiz_id,question_text,question_options,correct_answer) VALUES ({quiz_id},'{question['question_text']}',ARRAY {question['question_options']},'{question['correct_answer']}')")
+        
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return jsonify({'status':'Uploaded'})
+
 @app.route('/quiz/evaluate/<int:quiz_id>', methods=["POST"])
 @authorization
 @cross_origin(origins="*")

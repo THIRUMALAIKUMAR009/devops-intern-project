@@ -1,7 +1,7 @@
 import axios from "axios"
 
-const url = process.env.REACT_APP_HOST
-// const url = "http://127.0.0.1:5000"
+// const url = process.env.REACT_APP_HOST
+const url = "http://127.0.0.1:5000"
 
 export const Login = async(input) => {
     const {data} = await axios.post(`${url}/login`,input)
@@ -25,7 +25,6 @@ export const getUserdata = async () => {
     let data = sessionStorage.getItem('user-data') || null;
     if(data === null)
     {
-        console.log("Api call..")
         let token = sessionStorage.getItem('API_Key');
         token = JSON.parse(token);
         let {data} = await axios.get(`${url}/user?apikey=${token}`)
@@ -186,6 +185,14 @@ export const evaluateQuiz = async(input,quiz_id) => {
     let token = sessionStorage.getItem('API_Key');
     token = JSON.parse(token);
     const {data} = await axios.post(`${url}/quiz/evaluate/${quiz_id}?apikey=${token}`,input)
+
+    return data
+}
+
+export const uploadQuiz = async(quiz_id,input) => {
+    let token = sessionStorage.getItem('API_Key');
+    token = JSON.parse(token);
+    const {data} = await axios.post(`${url}/quiz/fileupload/${quiz_id}?apikey=${token}`,input)
 
     return data
 }

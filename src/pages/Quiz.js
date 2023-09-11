@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { useParams } from "react-router"
-import { addQuiz, deleteQuiz, evaluateQuiz, getQuiz, getUserdata, updateQuiz } from "./API"
+import { addQuiz, deleteQuiz, evaluateQuiz, getQuiz, getUserdata, updateQuiz, uploadQuiz } from "./API"
 
 function Quiz()
 {
@@ -17,7 +17,8 @@ function Quiz()
     const update_question = useRef()
     const update_options = useRef()
     const update_answer = useRef()
-    
+    const file = useRef()
+    const [filename,setFile] = useState()
     useEffect(() =>{
         fetchQuiz()
     },[params])
@@ -30,16 +31,17 @@ function Quiz()
             setLoader(false)
             getUserdata().then(res => {
                 setData(res.role)
-                console.log(res)
+                // console.log(res)
             })
         }).catch(error => alert(error))
     }
     let answers = questions.length > 0 ? new Array(questions.length).fill(null) : null
 
     const submit = () =>{
+        setLoader(true)
         evaluateQuiz(answers,params.id).then(data =>{
             setRes(data)
-            // setAns(new Array(data.length).fill(null))
+            setLoader(false)
             let heading = document.getElementById('heading')
             heading.scrollIntoView()
         })
@@ -92,6 +94,24 @@ function Quiz()
         }
     }
 
+    const uploadfn = (event) => {
+        try {
+            event.preventDefault()
+            setLoader(true)
+            setFile(file.current.files[0].name)
+            const input = new FormData()
+            input.append('file',file.current.files[0])
+            uploadQuiz(params.id,input).then(data => {
+                console.log(data)
+                setLoader(false)
+                setQue([])
+                fetchQuiz()
+            })
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
     return (
         <>
             <div className="quizpage">
@@ -104,12 +124,16 @@ function Quiz()
                     <input id="usumbit" type="submit" value="Update"/>
                 </form>
             </div>}
-            {data !== '' && data !== 'Student' && <form className="admin-form" onSubmit={addQuestion}>
+            {data !== '' && data !== 'Student' && <div><form className="admin-form" onSubmit={addQuestion}>
                         <input id='que' type="text" ref={question} placeholder="Question" required/>
                         <input id='opt'type="text" ref={options} placeholder="options" required/>
                         <input id='ans' type="text" ref={answer} placeholder="answer" required/>
                         <input id='sub' type="submit" value="+"/>
-                    </form>}
+                    </form>
+                    <form className="admin-form">
+                        <input type="file" ref={file} accept=".csv" style={{color:"#fff"}} onChange={uploadfn}/>
+                    </form></div>
+                    }
                 {loader && <div className="loader"/>}
                 {questions.length > 0 && <h1 className="heading" id="heading">{questions[0].quiz_title}</h1>}
                 {result !== '' && result >= 0 && <h2 className="result">You have scored {result}/{questions.length}</h2>}

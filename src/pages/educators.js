@@ -1,13 +1,11 @@
 import { useEffect, useRef, useState } from "react"
-import { addEducators, deleteEducators, getEducators } from "./API"
-import { useLocation } from "react-router"
+import { addEducators, deleteEducators, getEducators, getUserdata } from "./API"
 
 function Educators()
 {
     const [educators,setEd] = useState([])
     const [loader,setLoader] = useState(false)
-    const location = useLocation()
-    const {role} = location.state
+    const [data,setData] = useState()
     const email = useRef()
     const subjects = useRef()
     const biography = useRef()
@@ -21,6 +19,9 @@ function Educators()
             setEd(data)
             // console.log(data)
             setLoader(false)
+            getUserdata().then((res) => {
+                setData(res)
+            })
         }).catch(error => alert(error))
     }
     const submit = (event) => {
@@ -65,7 +66,7 @@ function Educators()
         <>
             <div className="educators">
             <div className="educators">
-                {role === 'admin' && <form className="admin-form" onSubmit={submit}>
+                {data?.role === 'admin' && <form className="admin-form" onSubmit={submit}>
                         <input id="mail" type="email" ref={email} placeholder="Enter email" required/>
                         <input id='bio'type="text" ref={biography} placeholder="biography" required/>
                         <input id="sub" type="text" ref={subjects} placeholder="subjects" required/>
@@ -77,7 +78,7 @@ function Educators()
                     {educators.length > 0 && educators.map((educator,index) => {
                         return(
                             <div className={"profilecard"} key={index}>
-                            {role === 'admin' && <span className="close" onClick={()=>{deletefn(educator.email)}}>x</span>}
+                            {data?.role === 'admin' && <span className="close" onClick={()=>{deletefn(educator.email)}}>x</span>}
                             <div>
                                 <img src={educator.image} className="image" alt="avatar"/>
                             </div>

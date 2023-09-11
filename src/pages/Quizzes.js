@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
-import { useLocation, useNavigate } from "react-router"
-import { addQuizzes, deleteQuizzes, getQuizzes, updateQuizzes } from "./API"
+import { useNavigate } from "react-router"
+import { addQuizzes, deleteQuizzes, getQuizzes, getUserdata, updateQuizzes } from "./API"
 
 function Quizzes()
 {
@@ -9,8 +9,7 @@ function Quizzes()
     const [update,setUpdate] = useState(false)
     const [data,setdata] = useState()
     const navigate = useNavigate()
-    const location = useLocation()
-    const {role} = location.state
+    const [userData,setUser] = useState()
     const id = useRef()
     const title = useRef()
     const description = useRef()
@@ -27,6 +26,9 @@ function Quizzes()
             // console.log(res.data)
             setQue(data)
             setLoader(false)
+            getUserdata().then(res => {
+                setUser(res)
+            })
         }).catch(error => alert(error))
     }
 
@@ -85,7 +87,7 @@ function Quizzes()
                     <input id='upsubmit' type="submit" value="Update"/>
                 </form>
             </div>}
-            {role !== 'Student' && <form className="admin-form" onSubmit={submit}>
+            {userData?.role !== 'Student' && <form className="admin-form" onSubmit={submit}>
                         <input id='id' type="text" ref={id} placeholder="course id" required/>
                         <input id='tit' type="text" ref={title} placeholder="quiz title" required/>
                         <input id='qu' type="text" ref={description} placeholder="quiz description" required/>
@@ -101,11 +103,11 @@ function Quizzes()
                                     <span className="title" onClick={() => {navigate(`/main/quiz/${question.quiz_id}`)}}>{index+1}. {question.quiz_title}</span>
                                     <p>{question.quiz_description}</p>
                                     <div className="edit">
-                                        {role !== 'Student' && <input id='updatebtn' type="button" className="updatebtn" value="update" onClick={async() => {
+                                        {userData?.role !== 'Student' && <input id='updatebtn' type="button" className="updatebtn" value="update" onClick={async() => {
                                             setUpdate(true)
                                             setdata(question)
                                         }}/>}
-                                        {role !== 'Student' && <input id='deletebtn' type="button" className="deletebtn" value="Delete" onClick={() => {
+                                        {userData?.role !== 'Student' && <input id='deletebtn' type="button" className="deletebtn" value="Delete" onClick={() => {
                                             deletefn(question)
                                         }}/>}
                                     </div>

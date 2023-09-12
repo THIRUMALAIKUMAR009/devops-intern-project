@@ -51,7 +51,7 @@ const Contactus = () => {
             </div>
             <div className="text">
               <h3>Phone</h3>
-              <p>507-485-6094</p>
+              <p>739-7297-819</p>
             </div>
           </div>
           <div className="box">

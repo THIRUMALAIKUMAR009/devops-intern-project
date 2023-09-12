@@ -1156,6 +1156,7 @@ nav{
 .profilepage
 {
   justify-content: center;
+  
 }
 .profilepage > form
 {
@@ -1187,12 +1188,61 @@ nav{
 {
   align-self: flex-start;
 } */
-.profilepage > form > div > input
-{
+.profilepage > form > div > input {
   width: 80%;
   height: 50px;
   padding: 10px;
   font-size: 1.5em;
-  border: none;
+  border: 2px solid #000; /* Add this line for a black border */
   border-radius: 10px;
+}
+
+
+
+/* Container for the course details */
+.details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+
+button {
+  padding: 10px 20px;
+  background-color: #f12409; 
+  color: #fff; 
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px; 
+}
+
+button:hover {
+  background-color: #ffa45b; 
+}
+
+
+
+.admin-form {
+  background-color: #333; 
+  padding: 20px; 
+}
+
+.admin-form input[type="file"] {
+  color: #fff; 
+  border: none; 
+  background-color: #444; 
+  padding: 10px; 
+  border-radius: 5px; 
+  cursor: pointer; 
+}
+
+.admin-form input[type="file"]:hover {
+  background-color: #555; 
+}
+
+.admin-form input[type="file"]:focus {
+  outline: none; 
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); 
 }
